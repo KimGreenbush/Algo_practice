@@ -32,3 +32,24 @@ var deleteDuplicates = function (head) {
 	runner1.next = null //runner2 reaches the end so all remaining nodes are dupes, cutoff after runner1
 	return head
 }
+
+
+/* GPT
+function ListNode(val, next) {
+    this.val = val;
+    this.next = next;
+}
+
+function deleteDuplicates(head) {
+    let current = head;
+    while (current && current.next) {
+        if (current.val === current.next.val) {
+            current.next = current.next.next;
+        } else {
+            current = current.next;
+        }
+    }
+    return head;
+}
+
+*/
