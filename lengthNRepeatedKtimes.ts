@@ -22,28 +22,33 @@ const arr2: number[] = [1, 2, 1, 2, 1, 3] // false
 const m2: number = 2 // length of the pattern
 const k2: number = 3 // number of times pattern repeats
 
-function containsPattern(arr, m, k) {
+function containsPattern(arr: number[], m: number, k: number): boolean {
 	if (m * k > arr.length) return false
 
-	var count = -1
-	var left = 0
-	var right = m
-	var subArr = arr.slice(0, m)
+	let count: number = 0
+	let left: number = 0
+	let right: number = m
+
+	let subArr: number[] = arr.slice(0, m)
+
 	while (left < right || m < arr.length) {
 		if (m > arr.length) return false // end of array condition
-		if (arr[0] != arr[right] && count <= 0) {
+		if (arr[0] != arr[right] && !count) {
+			count = 0
 			left = 0
-			arr.shift()
+			arr.shift() // this is bad because it's another loop so O(n^2)
 			subArr = arr.slice(0, m)
 		}
 		if (arr[left] === subArr[left]) {
 			// TODO: handle undefined?
 			left++
 		} else {
-			count = -1
+			count = 0
+			arr = arr.slice(left)
 			left = 0
 			subArr = arr.slice(0, m)
 		}
+
 		// when left equals right we can assume the subarray and arr subset
 		// matches so we slice the array removing the matched elements
 		// increment the count, and reset left
@@ -53,9 +58,30 @@ function containsPattern(arr, m, k) {
 			arr = arr.slice(m)
 			count++
 		}
+
 		if (count === k) return true
 	}
 	return false
 }
+
+// This function focuses on the math of the matching pattern
+// the "count" needs to match the total of the pattern length x pattern repeat
+function containsPattern2(arr: number[], m: number, k: number): boolean {
+	let count = 0
+	for (let i = 0, j = m; i < arr.length - m; i++, j++) {
+		if (arr[i] === arr[j]) {
+			count++
+		} else {
+			count = 0
+		}
+
+		if (count === m * (k - 1)) {
+			return true
+		}
+	}
+
+	return false
+}
+console.log(containsPattern2(arr3, m3, k3))
 
 console.log(containsPattern(arr, m, k))
