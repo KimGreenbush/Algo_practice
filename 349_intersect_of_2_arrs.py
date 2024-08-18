@@ -28,6 +28,7 @@ def intersect_imp_recreated(n1, n2):
     for x in little:
         if x in big:
             res.add(x)
+            continue # does this do anything?
     return res
 
 print(intersect_imp_recreated(nums3, nums4))
