@@ -27,3 +27,7 @@ def checkAlmostEquivalent(self, word1: str, word2: str) -> bool:
             return False
 
     return True
+
+
+# Counter takes an array (or string) and returns a dictionary of the values matched to their counts 
+# could have been useful for replacing the dict crecation and the default value issue where there was a Key Error
