@@ -3,6 +3,9 @@
 
 #52.5%
 
+# slow/fast approach
+# https://leetcode.com/problems/linked-list-cycle/solutions/6556606/0ms-100-step-by-step-explained-with-visualization-easiest-to-understand-java-c-python
+
 # Definition for singly-linked list.
 class ListNode:
     def __init__(self, x):
